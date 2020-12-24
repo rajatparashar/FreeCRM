@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<freecrm>
+	<login>
+		<url>https://ui.freecrm.com/</url>
+		<username>rajatparasharan@gmail.com</username>
+		<password>Rajat@1234</password>
+		<browser>chrome</browser>
+	</login>
+</freecrm>
