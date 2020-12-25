@@ -45,29 +45,19 @@ public class XLMParser {
 	}
 
 	public static String geturl() throws Exception {
-		System.out.println(readXML("url"));
 		return readXML("url");
 	}
 
 	public static String getusername() throws Exception {
-		System.out.println(readXML("username"));
 		return readXML("username");
 	}
 
 	public static String getpassword() throws Exception {
-		System.out.println(readXML("password"));
 		return readXML("password");
 	}
-	
+
 	public static String getbrowser() throws Exception {
-		System.out.println(readXML("browser"));
 		return readXML("browser");
 	}
 
-	public static void main(String[] args) throws Exception {
-		geturl();
-		getusername();
-		getpassword();
-		getbrowser();
-	}
 }

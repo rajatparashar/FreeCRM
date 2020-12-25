@@ -1,38 +1,64 @@
 package com.qa.freecrm.base;
 
-import java.util.concurrent.TimeUnit;
+import org.junit.internal.runners.statements.ExpectException;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeTest;
-import com.qa.freecrm.common.utilities.XLMParser;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PageBase {
-	static WebDriver driver;
+	private static final int TIMEOUT = 50;
+	private static final int POLLING = 100;
 
-	@BeforeTest
-	public void LaunchBrowser() throws Exception {
-		String browser = XLMParser.getbrowser();
-		String url = XLMParser.geturl();
-		String username = XLMParser.getusername();
-		String password = XLMParser.getpassword();
-		
-		if(browser.equalsIgnoreCase("chrome")) {
-			System.setProperty("webdriver.driver.chromedriver", System.getProperty("user.dir")+"//Drivers//chromedriver.exe");
-			driver = new ChromeDriver();
-		}
-		else if(browser.equalsIgnoreCase("firefox")) {
-			System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir")+"//Drivers//geckodriver.exe");
-			driver = new ChromeDriver();
-		}
-		else if(browser.equalsIgnoreCase("opera")) {
-			System.setProperty("webdriver.opera.driver", System.getProperty("user.dir")+"//Drivers//operadriver.exe");
-			driver = new ChromeDriver();
-		}
-		driver.manage().window().maximize();
-		driver.manage().deleteAllCookies();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get(url);
-		
+	protected WebDriver driver;
+	private WebDriverWait wait;
 
+	public PageBase(WebDriver driver) {
+		this.driver = driver;
+		wait = new WebDriverWait(driver, TIMEOUT, POLLING);
+		PageFactory.initElements(new AjaxElementLocatorFactory(driver, TIMEOUT), this);
 	}
+	
+//	public WebElement findElement(WebElement parentElem, String sLocatorType, String sValue) {
+//		WebElement retElem = null;
+//		try {
+//			retElem = pingDOMToFindElement( parentElem, sLocatorType, sValue);
+//			if(retElem.isDisplayed() == false) {
+//				System.out.println("Element is not visible");
+//			}
+//			
+//		} catch (Exception e) {
+//			retElem = null;
+//		}
+//		return retElem; 
+//	}
+//	
+//	public WebElement pingDOMToFindElement(final WebElement parentElem, final String sLocatorType, final String sValue) {
+//		WebElement retElem = (new WebDriverWait(driver, 10)).until(new ExpectedCondition<WebElement>() {
+//			public WebElement apply(WebDriver driver) {
+//				WebElement elem = null;
+//				if(parentElem == null) {
+//					if(sLocatorType.equals("name")) {
+//						elem = driver.findElement(By.name(sValue));
+//					}
+//					else if(sLocatorType.equals("id")) {
+//						elem = driver.findElement(By.id(sValue));
+//					}
+//				}
+//				else {
+//					if(sLocatorType.equals("name")) {
+//						elem = parentElem.findElement(By.name(sValue));
+//					}
+//					else if(sLocatorType.equals("id")) {
+//						elem = parentElem.findElement(By.id(sValue));
+//					}
+//				}
+//				return elem;
+//			}});
+//		return retElem;		
+//	}
+
 }
