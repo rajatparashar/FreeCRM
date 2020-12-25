@@ -12,7 +12,6 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
 public class ExcelReader {
 
@@ -64,9 +63,9 @@ public class ExcelReader {
 	}
 
 	public static void main(String[] args) throws Exception {
-		ExcelReader excelReader = new ExcelReader(System.getProperty("user.dir") + "//TestData//CalendarTestData.xlsx");
-		System.out.println(excelReader.getCellData("Calendar", "Location"));
-	}
+//		ExcelReader excelReader = new ExcelReader(System.getProperty("user.dir") + "//TestData//CalendarTestData.xlsx");
+//		System.out.println(excelReader.getCellData("Calendar", "Location"));
+			}
 	
 	
 	

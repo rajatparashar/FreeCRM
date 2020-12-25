@@ -5,8 +5,13 @@
     <classes>
       <class name="com.qa.freecrm.calendar.testcases.CalendarTestCases">
         <methods>
+          <include name="endReport"/>
           <include name="CreateNewEventTest"/>
+          <include name="CreateNewEventTest3"/>
+          <include name="extentReportSetUp"/>
+          <include name="CreateNewEventTest2"/>
           <include name="LaunchBrowser"/>
+          <include name="getResult"/>
           <include name="tearDown"/>
         </methods>
       </class> <!-- com.qa.freecrm.calendar.testcases.CalendarTestCases -->

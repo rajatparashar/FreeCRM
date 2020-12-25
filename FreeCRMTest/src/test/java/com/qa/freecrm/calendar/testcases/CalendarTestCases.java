@@ -8,8 +8,9 @@ import com.qa.freecrm.calendar.pages.CalendarPages;
 
 public class CalendarTestCases extends TestBase {
 
-	@Test
+	@Test(priority = 0)
 	public void CreateNewEventTest() throws Exception {
+		test = extent.createTest("Create new Event Test");
 		CalendarPages calendarPages = new CalendarPages(getDriver());
 		
 		ArrayList<String> data = new ArrayList<String>();
@@ -37,5 +38,30 @@ public class CalendarTestCases extends TestBase {
 		calendarPages.clickNewButton();
 		calendarPages.verifyCreateNewEventPage();
 		calendarPages.enterCalendarDetails(data);
+	}
+
+	@Test(priority = 1)
+	public void CreateNewEventTest2() throws Exception {
+		test = extent.createTest("Create new Event Test 2");
+		CalendarPages calendarPages = new CalendarPages(getDriver());
+		
+		calendarPages.clickCalendarButton();
+		calendarPages.verifyCalendarPage();
+		calendarPages.clickNewButton();
+		calendarPages.verifyCreateNewEventPage();
+//		calendarPages.enterCalendarDetails(data);
+	}
+	
+
+	@Test(priority = 2)
+	public void CreateNewEventTest3() throws Exception {
+		test = extent.createTest("Create new Event Test 3");
+		CalendarPages calendarPages = new CalendarPages(getDriver());
+		
+		calendarPages.clickCalendarButton();
+		calendarPages.verifyCalendarPage();
+		calendarPages.clickNewButton();
+		calendarPages.verifyCreateNewEventPage();
+//		calendarPages.enterCalendarDetails(data);
 	}
 }
