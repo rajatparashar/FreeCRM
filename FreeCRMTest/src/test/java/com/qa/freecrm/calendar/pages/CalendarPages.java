@@ -3,6 +3,7 @@ package com.qa.freecrm.calendar.pages;
 import java.util.ArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import com.qa.freecrm.base.PageBase;
 
@@ -26,7 +27,7 @@ public class CalendarPages extends PageBase {
 	private By tagsElement = By.xpath("//label[contains(text(),'Tags')]/..//div//i");
 	private By descriptionElement = By.xpath("//label[contains(text(),'Description')]/..//textarea");
 	private By locationElement = By.xpath("//label[contains(text(),'Location')]/..//textarea");
-	private By allDayElement = By.xpath("//label[contains(text(),'All Day')]/..//div/input");
+	private By allDayElement = By.xpath("//label[contains(text(),'All Day')]/..//div/label");
 	private By dealElement = By.xpath("//label[contains(text(),'Deal')]/..//div/input");
 	private By taskElement = By.xpath("//label[contains(text(),'Task')]/..//div/input");
 	private By caseElement = By.xpath("//label[contains(text(),'Case')]/..//div/input");
@@ -39,26 +40,26 @@ public class CalendarPages extends PageBase {
 
 	public void clickCalendarButton() throws InterruptedException {
 		driver.findElement(calendarButton).click();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 	}
 
 	public void verifyCalendarPage() throws InterruptedException {
 		String pageHeader = driver.findElement(pageTitle).getText();
 		System.out.println(pageHeader);
 		Assert.assertTrue(pageHeader.equals("Calendar"));
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 	}
 
 	public void clickNewButton() throws InterruptedException {
 		driver.findElement(newButton).click();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 	}
 
 	public void verifyCreateNewEventPage() throws InterruptedException {
 		String pageHeader = driver.findElement(createNewEventHeader).getText();
 		System.out.println(pageHeader);
 		Assert.assertTrue(pageHeader.equals("Create new Event"));
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 	}
 
 	public void enterCalendarDetails(ArrayList<String> data) throws Exception {
@@ -89,16 +90,16 @@ public class CalendarPages extends PageBase {
 		enterTags(tagsValue);
 		enterDescription(descriptionValue);
 		enterLocation(locationValue);
-		enteAllDay(allDayValue);
+		enterAllDay(allDayValue);
 		enterDeal(dealValue);
 		enterTask(taskValue);
 		enterCase(caseValue);
 		enterAlertBefore(alertBeforeValue);
-		enterReminderTime(reminderTimeValue);
-		enterAssignedTo(assignedToValue);
-		enterParticipants(participantsValue);
-		enterCompany(companyValue);
-		enterIdentifier(identifierValue);
+//		enterReminderTime(reminderTimeValue);
+//		enterAssignedTo(assignedToValue);
+//		enterParticipants(participantsValue);
+//		enterCompany(companyValue);
+//		enterIdentifier(identifierValue);
 
 	}
 
@@ -116,56 +117,103 @@ public class CalendarPages extends PageBase {
 
 	public void enterTitle(String sValue) throws InterruptedException {
 		driver.findElement(titleElement).sendKeys(sValue);
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		System.out.println("Title: "+sValue);
 	}
 
-	public void enterCalendar(String sValue) {
-
+	public void enterCalendar(String sValue) throws InterruptedException {
+		driver.findElement(calendarElement).click();
+		String xpath = "//div[@name='calendar']//div[contains(@class,'menu')]//div/span[contains(text(),'"+sValue+"')]";
+		driver.findElement(By.xpath(xpath)).click();
+		Thread.sleep(1000);
 	}
 
-	public void enterCategory(String sValue) {
-
+	public void enterCategory(String sValue) throws InterruptedException {
+		driver.findElement(categoryElement).click();
+		String xpath = "//div[@name='category']//div[contains(@class,'menu')]//div//span[contains(text(),'"+sValue+"')]";
+		driver.findElement(By.xpath(xpath)).click();
+		Thread.sleep(1000);
 	}
 
-	public void enterStartDate(String sValue) {
-
+	public void enterStartDate(String sValue) throws InterruptedException {
+		driver.findElement(startDateElement).click();
+		driver.findElement(startDateElement).clear();
+		driver.findElement(startDateElement).sendKeys(sValue);
+		Thread.sleep(1000);
 	}
 
-	public void enterEndDate(String sValue) {
-
+	public void enterEndDate(String sValue) throws InterruptedException {
+		driver.findElement(endDateElement).click();
+		driver.findElement(endDateElement).clear();
+		driver.findElement(endDateElement).sendKeys(sValue);
+		Thread.sleep(1000);
 	}
 
-	public void enterTags(String sValue) {
-
+	public void enterTags(String sValue) throws InterruptedException {
+		driver.findElement(tagsElement).click();
+		WebElement tagInput = driver.findElement(By.xpath("//label[contains(text(),'Tags')]/..//input"));
+		tagInput.sendKeys(sValue);
+		WebElement suggestion = driver.findElement(By.xpath("//label[contains(text(),'Tags')]/..//div//div//span"));
+		suggestion.click();
+		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Tags')]/..//div//a[contains(text(),'"+sValue+"')]"));
+		Assert.assertTrue(addedLabel.isDisplayed());
+		Thread.sleep(1000);
 	}
 
 	public void enterDescription(String sValue) throws InterruptedException {
 		driver.findElement(descriptionElement).sendKeys(sValue);
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		System.out.println("Description: "+sValue);
 	}
 
 	public void enterLocation(String sValue) throws InterruptedException {
 		driver.findElement(locationElement).sendKeys(sValue);
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		System.out.println("Location: "+sValue);
 	}
 
-	public void enteAllDay(String sValue) {
+	public void enterAllDay(String sValue) throws InterruptedException {
+		if(sValue.equalsIgnoreCase("true")) {
+			driver.findElement(allDayElement).click();
+			Thread.sleep(1000);
+		}
+		else {
+			// no action required
+		}
+	}
+
+	public void enterDeal(String sValue) throws InterruptedException {
+		driver.findElement(dealElement).click();
+		WebElement dealInput = driver.findElement(By.xpath("//label[contains(text(),'Deal')]/..//input"));
+		dealInput.sendKeys(sValue);
+		WebElement suggestion = driver.findElement(By.xpath("//label[contains(text(),'Deal')]/..//div//div//span"));
+		suggestion.click();
+		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Deal')]/..//input//following-sibling::div[contains(text(),'"+sValue+"')]"));
+		Assert.assertTrue(addedLabel.getText().equalsIgnoreCase(sValue));
+		Thread.sleep(1000);
 
 	}
 
-	public void enterDeal(String sValue) {
-
+	public void enterTask(String sValue) throws InterruptedException {
+		driver.findElement(taskElement).click();
+		WebElement taskInput = driver.findElement(By.xpath("//label[contains(text(),'Task')]/..//input"));
+		taskInput.sendKeys(sValue);
+		WebElement suggestion = driver.findElement(By.xpath("//label[contains(text(),'Task')]/..//div//div//span"));
+		suggestion.click();
+		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Task')]/..//input//following-sibling::div[contains(text(),'"+sValue+"')]"));
+		Assert.assertTrue(addedLabel.getText().equalsIgnoreCase(sValue));
+		Thread.sleep(1000);
 	}
 
-	public void enterTask(String sValue) {
-
-	}
-
-	public void enterCase(String sValue) {
-
+	public void enterCase(String sValue) throws InterruptedException {
+		driver.findElement(caseElement).click();
+		WebElement caseInput = driver.findElement(By.xpath("//label[contains(text(),'Case')]/..//input"));
+		caseInput.sendKeys(sValue);
+		WebElement suggestion = driver.findElement(By.xpath("//label[contains(text(),'Case')]/..//div//div//span"));
+		suggestion.click();
+		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Case')]/..//input//following-sibling::div[contains(text(),'"+sValue+"')]"));
+		Assert.assertTrue(addedLabel.getText().equalsIgnoreCase(sValue));
+		Thread.sleep(1000);
 	}
 
 	public void enterAlertBefore(String sValue) {
@@ -174,7 +222,7 @@ public class CalendarPages extends PageBase {
 
 	public void enterReminderTime(String sValue) throws InterruptedException {
 		driver.findElement(reminderTimeElement).sendKeys(sValue);
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		System.out.println("ReminderTime: "+sValue);
 	}
 
@@ -192,7 +240,7 @@ public class CalendarPages extends PageBase {
 
 	public void enterIdentifier(String sValue) throws InterruptedException {
 		driver.findElement(identifierElement).sendKeys(sValue);
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		System.out.println("Identifier: "+sValue);
 	}
 }

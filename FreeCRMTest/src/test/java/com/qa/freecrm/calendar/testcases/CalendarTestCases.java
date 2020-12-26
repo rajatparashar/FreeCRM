@@ -1,7 +1,6 @@
 package com.qa.freecrm.calendar.testcases;
 
 import java.util.ArrayList;
-
 import org.testng.annotations.Test;
 import com.qa.freecrm.base.TestBase;
 import com.qa.freecrm.calendar.pages.CalendarPages;
@@ -12,56 +11,31 @@ public class CalendarTestCases extends TestBase {
 	public void CreateNewEventTest() throws Exception {
 		test = extent.createTest("Create new Event Test");
 		CalendarPages calendarPages = new CalendarPages(getDriver());
-		
+
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("My Meeting title");
-		data.add("");
-		data.add("");
-		data.add("");
-		data.add("");
-		data.add("");
+		data.add("My Calender");
+		data.add("Optional");
+		data.add("23/01/2021 16:15");
+		data.add("30/03/2021 22:30");
+		data.add("standup meeting");
 		data.add("My meeting Description");
 		data.add("My meeting Location");
-		data.add("");
-		data.add("");
-		data.add("");
-		data.add("");
-		data.add("");
+		data.add("true");
+		data.add("client deal");
+		data.add("client task");
+		data.add("client case");
+		data.add("30 Minutes");
 		data.add("50");
-		data.add("");
-		data.add("");
-		data.add("");
-		data.add("My meeting Identifier");
-		
+		data.add("Rajat P");
+		data.add("Rahul Gupta");
+		data.add("Google inc.");
+		data.add("Google meeting Identifier");
+
 		calendarPages.clickCalendarButton();
 		calendarPages.verifyCalendarPage();
 		calendarPages.clickNewButton();
 		calendarPages.verifyCreateNewEventPage();
 		calendarPages.enterCalendarDetails(data);
-	}
-
-	@Test(priority = 1)
-	public void CreateNewEventTest2() throws Exception {
-		test = extent.createTest("Create new Event Test 2");
-		CalendarPages calendarPages = new CalendarPages(getDriver());
-		
-		calendarPages.clickCalendarButton();
-		calendarPages.verifyCalendarPage();
-		calendarPages.clickNewButton();
-		calendarPages.verifyCreateNewEventPage();
-//		calendarPages.enterCalendarDetails(data);
-	}
-	
-
-	@Test(priority = 2)
-	public void CreateNewEventTest3() throws Exception {
-		test = extent.createTest("Create new Event Test 3");
-		CalendarPages calendarPages = new CalendarPages(getDriver());
-		
-		calendarPages.clickCalendarButton();
-		calendarPages.verifyCalendarPage();
-		calendarPages.clickNewButton();
-		calendarPages.verifyCreateNewEventPage();
-//		calendarPages.enterCalendarDetails(data);
 	}
 }
