@@ -1,12 +1,8 @@
 package com.qa.freecrm.base;
 
-import org.junit.internal.runners.statements.ExpectException;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PageBase {
@@ -21,7 +17,7 @@ public class PageBase {
 		wait = new WebDriverWait(driver, TIMEOUT, POLLING);
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, TIMEOUT), this);
 	}
-	
+
 //	public WebElement findElement(WebElement parentElem, String sLocatorType, String sValue) {
 //		WebElement retElem = null;
 //		try {

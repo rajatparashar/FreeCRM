@@ -21,11 +21,11 @@ public class CalendarTestCases extends TestBase {
 		data.add("standup meeting");
 		data.add("My meeting Description");
 		data.add("My meeting Location");
-		data.add("true");
+		data.add("Yes");
 		data.add("client deal");
 		data.add("client task");
 		data.add("client case");
-		data.add("30 Minutes");
+		data.add("1 Hour");
 		data.add("50");
 		data.add("Rajat P");
 		data.add("Rahul Gupta");
@@ -37,5 +37,7 @@ public class CalendarTestCases extends TestBase {
 		calendarPages.clickNewButton();
 		calendarPages.verifyCreateNewEventPage();
 		calendarPages.enterCalendarDetails(data);
+		calendarPages.clickSaveButton();
+		calendarPages.verifyMeetingCreated(data);
 	}
 }

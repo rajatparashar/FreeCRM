@@ -7,11 +7,15 @@ import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -39,15 +43,14 @@ public class TestBase {
 		String password = XLMParser.getpassword();
 
 		if (browser.equalsIgnoreCase("chrome")) {
-			System.setProperty("webdriver.chrome.driver",
-					System.getProperty("user.dir") + "//Drivers//chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir") + "//Drivers//chromedriver.exe");
 			driver = new ChromeDriver();
 		} else if (browser.equalsIgnoreCase("firefox")) {
 			System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "//Drivers//geckodriver.exe");
-			driver = new ChromeDriver();
+			driver = new FirefoxDriver();
 		} else if (browser.equalsIgnoreCase("opera")) {
 			System.setProperty("webdriver.opera.driver", System.getProperty("user.dir") + "//Drivers//operadriver.exe");
-			driver = new ChromeDriver();
+			driver = new OperaDriver();
 		}
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
@@ -61,10 +64,10 @@ public class TestBase {
 	public WebDriver getDriver() {
 		return driver;
 	}
-	
+
 	@AfterSuite
 	public void tearDown() {
-		driver.close();
+//		driver.close();
 	}
 
 	public ExtentHtmlReporter htmlReporter;
@@ -73,7 +76,8 @@ public class TestBase {
 
 	@BeforeTest
 	public void extentReportSetUp() throws UnknownHostException {
-		htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "//Reports//ExtentReport"+currentDate()+".html");
+		htmlReporter = new ExtentHtmlReporter(
+				System.getProperty("user.dir") + "//Reports//AutomationReport" + currentDate() + ".html");
 		extent = new ExtentReports();
 		extent.attachReporter(htmlReporter);
 		htmlReporter.config().setDocumentTitle("Automation Report");
@@ -88,6 +92,11 @@ public class TestBase {
 		extent.setSystemInfo("User Name : ", System.getProperty("user.name"));
 		InetAddress myIP = InetAddress.getLocalHost();
 		extent.setSystemInfo("IP Address : ", myIP.getHostAddress());
+		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
+		String browserName = cap.getBrowserName();
+		String browserVersion = cap.getVersion();
+		extent.setSystemInfo("Browser : ", browserName);
+		extent.setSystemInfo("Browser version : ", browserVersion);
 	}
 
 	@AfterTest
@@ -103,13 +112,10 @@ public class TestBase {
 			test.log(Status.FAIL,
 					MarkupHelper.createLabel(result.getThrowable() + " - Test Case Failed", ExtentColor.RED));
 
-			// To capture screenshot path and store the path of the screenshot in the string
-			// "screenshotPath"
-			// We do pass the path captured by this method in to the extent reports using
-			// "logger.addScreenCapture" method.
+			// To capture screenshot path and store the path of the screenshot in the string screenshotPath
+			// We do pass the path captured by this method in to the extent reports using "logger.addScreenCapture" method
 			String screenshotPath = TakeScreenshot(driver, result.getName());
 			// To add it in the extent report
-
 			test.fail("Test Case Failed Snapshot is below " + test.addScreenCaptureFromPath(screenshotPath));
 
 		} else if (result.getStatus() == ITestResult.SKIP) {
@@ -125,14 +131,12 @@ public class TestBase {
 		TakesScreenshot ts = (TakesScreenshot) driver;
 		File source = ts.getScreenshotAs(OutputType.FILE);
 
-		// after execution, you could see a folder "FailedTestsScreenshots" under src
-		// folder
 		String destination = System.getProperty("user.dir") + "//Screenshots//" + screenshotName + dateName + ".png";
 		File finalDestination = new File(destination);
 		FileHandler.copy(source, finalDestination);
 		return destination;
 	}
-	
+
 	public String currentDate() {
 		return new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss").format(new Date());
 	}
