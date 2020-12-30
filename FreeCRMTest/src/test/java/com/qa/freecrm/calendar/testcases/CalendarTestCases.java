@@ -1,16 +1,23 @@
 package com.qa.freecrm.calendar.testcases;
 
 import java.util.ArrayList;
+
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentTest;
 import com.qa.freecrm.base.TestBase;
 import com.qa.freecrm.calendar.pages.CalendarPages;
 
 public class CalendarTestCases extends TestBase {
 
+	public CalendarTestCases() {
+		super();
+	}
 	@Test(priority = 0)
 	public void CreateNewEventTest() throws Exception {
 		test = extent.createTest("Create new Event Test");
-		CalendarPages calendarPages = new CalendarPages(getDriver());
+		CalendarPages calendarPages = new CalendarPages(TestBase.test, this.getDriver());
 
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("My Meeting title");

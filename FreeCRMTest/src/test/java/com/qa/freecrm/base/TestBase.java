@@ -33,7 +33,10 @@ import com.qa.freecrm.common.utilities.LoginPage;
 import com.qa.freecrm.common.utilities.XLMParser;
 
 public class TestBase {
-	static WebDriver driver;
+	WebDriver driver;
+	public static ExtentHtmlReporter htmlReporter;
+	public static ExtentReports extent;
+	public static ExtentTest test;
 
 	@BeforeSuite
 	public void LaunchBrowser() throws Exception {
@@ -41,9 +44,8 @@ public class TestBase {
 		String url = XLMParser.geturl();
 		String username = XLMParser.getusername();
 		String password = XLMParser.getpassword();
-
 		if (browser.equalsIgnoreCase("chrome")) {
-			System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir") + "//Drivers//chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "//Drivers//chromedriver.exe");
 			driver = new ChromeDriver();
 		} else if (browser.equalsIgnoreCase("firefox")) {
 			System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "//Drivers//geckodriver.exe");
@@ -67,23 +69,17 @@ public class TestBase {
 
 	@AfterSuite
 	public void tearDown() {
-//		driver.close();
+		driver.close();
 	}
-
-	public ExtentHtmlReporter htmlReporter;
-	public ExtentReports extent;
-	public ExtentTest test;
 
 	@BeforeTest
 	public void extentReportSetUp() throws UnknownHostException {
-		htmlReporter = new ExtentHtmlReporter(
-				System.getProperty("user.dir") + "//Reports//AutomationReport" + currentDate() + ".html");
+		htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "//Reports//AutomationReport" + currentDate() + ".html");
 		extent = new ExtentReports();
 		extent.attachReporter(htmlReporter);
 		htmlReporter.config().setDocumentTitle("Automation Report");
 		htmlReporter.config().setReportName("Free CRM Test Report");
 		htmlReporter.config().setTheme(Theme.STANDARD);
-
 		// General information related to application
 		extent.setSystemInfo("Aplication name : ", "Free CRM");
 		extent.setSystemInfo("OS : ", System.getProperty("os.name"));
@@ -109,18 +105,15 @@ public class TestBase {
 		if (result.getStatus() == ITestResult.FAILURE) {
 			// MarkupHelper is used to display the output in different colors
 			test.log(Status.FAIL, MarkupHelper.createLabel(result.getName() + " - Test Case Failed", ExtentColor.RED));
-			test.log(Status.FAIL,
-					MarkupHelper.createLabel(result.getThrowable() + " - Test Case Failed", ExtentColor.RED));
-
-			// To capture screenshot path and store the path of the screenshot in the string screenshotPath
+			test.log(Status.FAIL, MarkupHelper.createLabel(result.getThrowable() + " - Test Case Failed", ExtentColor.RED));
+			// To capture screenshot path and store the path of the screenshot in the string
+			// screenshotPath
 			// We do pass the path captured by this method in to the extent reports using "logger.addScreenCapture" method
 			String screenshotPath = TakeScreenshot(driver, result.getName());
 			// To add it in the extent report
 			test.fail("Test Case Failed Snapshot is below " + test.addScreenCaptureFromPath(screenshotPath));
-
 		} else if (result.getStatus() == ITestResult.SKIP) {
-			test.log(Status.SKIP,
-					MarkupHelper.createLabel(result.getName() + " - Test Case Skipped", ExtentColor.ORANGE));
+			test.log(Status.SKIP, MarkupHelper.createLabel(result.getName() + " - Test Case Skipped", ExtentColor.ORANGE));
 		} else if (result.getStatus() == ITestResult.SUCCESS) {
 			test.log(Status.PASS, MarkupHelper.createLabel(result.getName() + " Test Case PASSED", ExtentColor.GREEN));
 		}
@@ -130,7 +123,6 @@ public class TestBase {
 		String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
 		TakesScreenshot ts = (TakesScreenshot) driver;
 		File source = ts.getScreenshotAs(OutputType.FILE);
-
 		String destination = System.getProperty("user.dir") + "//Screenshots//" + screenshotName + dateName + ".png";
 		File finalDestination = new File(destination);
 		FileHandler.copy(source, finalDestination);

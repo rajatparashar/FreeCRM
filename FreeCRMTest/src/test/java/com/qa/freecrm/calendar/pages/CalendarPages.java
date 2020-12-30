@@ -5,12 +5,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.qa.freecrm.base.PageBase;
+import com.qa.freecrm.base.TestBase;
 
 public class CalendarPages extends PageBase {
-
-	public CalendarPages(WebDriver driver) {
-		super(driver);
+	public CalendarPages(ExtentTest extentTest, WebDriver oDriver) {
+		driver = oDriver;
+		logger = extentTest;
 	}
 
 	private By pageTitle = By.xpath("//div[@id='dashboard-toolbar']//div[contains(@class,'ui header')]");
@@ -39,12 +42,13 @@ public class CalendarPages extends PageBase {
 
 	public void clickCalendarButton() throws InterruptedException {
 		driver.findElement(calendarButton).click();
+		logger.log(Status.INFO, "Clicked on Calendar button");
 	}
 
 	public void verifyCalendarPage() throws InterruptedException {
 		String pageHeader = driver.findElement(pageTitle).getText();
-		System.out.println(pageHeader);
 		Assert.assertTrue(pageHeader.equals("Calendar"));
+		logger.log(Status.PASS, "User is navigated to Calendar page");
 	}
 
 	public void clickNewButton() throws InterruptedException {
@@ -53,8 +57,8 @@ public class CalendarPages extends PageBase {
 
 	public void verifyCreateNewEventPage() throws InterruptedException {
 		String pageHeader = driver.findElement(createNewEventHeader).getText();
-		System.out.println(pageHeader);
 		Assert.assertTrue(pageHeader.equals("Create new Event"));
+		logger.log(Status.PASS, "User is navigated to Create new Event page");
 	}
 
 	public void enterCalendarDetails(ArrayList<String> data) throws Exception {
@@ -101,12 +105,8 @@ public class CalendarPages extends PageBase {
 		driver.findElement(saveButton).click();
 	}
 
-	public void mouseOverCalendar(String sValue) {
-	}
-
 	public void enterTitle(String sValue) throws InterruptedException {
 		driver.findElement(titleElement).sendKeys(sValue);
-		System.out.println("Title: " + sValue);
 	}
 
 	public void enterCalendar(String sValue) throws InterruptedException {
@@ -145,12 +145,10 @@ public class CalendarPages extends PageBase {
 
 	public void enterDescription(String sValue) throws InterruptedException {
 		driver.findElement(descriptionElement).sendKeys(sValue);
-		System.out.println("Description: " + sValue);
 	}
 
 	public void enterLocation(String sValue) throws InterruptedException {
 		driver.findElement(locationElement).sendKeys(sValue);
-		System.out.println("Location: " + sValue);
 	}
 
 	public void enterAllDay(String sValue) throws InterruptedException {
@@ -199,7 +197,6 @@ public class CalendarPages extends PageBase {
 
 	public void enterReminderTime(String sValue) throws InterruptedException {
 		driver.findElement(reminderTimeElement).sendKeys(sValue);
-		System.out.println("ReminderTime: " + sValue);
 	}
 
 	public void enterAssignedTo(String sValue) throws InterruptedException {
@@ -230,7 +227,6 @@ public class CalendarPages extends PageBase {
 
 	public void enterIdentifier(String sValue) throws InterruptedException {
 		driver.findElement(identifierElement).sendKeys(sValue);
-		System.out.println("Identifier: " + sValue);
 	}
 
 	public void verifyMeetingCreated(ArrayList<String> data) throws InterruptedException {
@@ -271,21 +267,36 @@ public class CalendarPages extends PageBase {
 		String actualIdentifier = driver.findElement(By.xpath("//div[contains(text(),'Identifier')]/following-sibling::div//div//span//p")).getText();
 
 		Assert.assertEquals(actualTitle, titleValue);
+		logger.log(Status.PASS, "Title matches");
 		Assert.assertEquals(actualCalendar, calendarValue);
+		logger.log(Status.PASS, "Calendar value matches");
 		Assert.assertEquals(actualCategory, categoryValue);
+		logger.log(Status.PASS, "Category matches");
 //		Assert.assertEquals(actualStartDate, startDateValue);
 //		Assert.assertEquals(actualEndDate, endDateValue);
 		Assert.assertEquals(actualTags, tagsValue);
+		logger.log(Status.PASS, "Tag matches");
 		Assert.assertEquals(actualDescription, descriptionValue);
+		logger.log(Status.PASS, "Description matches");
 		Assert.assertEquals(actualLocation, locationValue);
+		logger.log(Status.PASS, "Location matches");
 		Assert.assertEquals(actualAllDay, allDayValue);
+		logger.log(Status.PASS, "All Day matches");
 		Assert.assertEquals(actualDeal, dealValue);
+		logger.log(Status.PASS, "Deal matches");
 		Assert.assertEquals(actualTask, taskValue);
+		logger.log(Status.PASS, "Task matches");
 		Assert.assertEquals(actualCase, caseValue);
+		logger.log(Status.PASS, "Case matches");
 		Assert.assertEquals(actualReminderTime, reminderTimeValue);
+		logger.log(Status.PASS, "Reminder Time mtches");
 		Assert.assertEquals(actualAssignedTo, assignedToValue);
+		logger.log(Status.PASS, "Assigned To matches");
 		Assert.assertEquals(actualParticipants, participantsValue);
+		logger.log(Status.PASS, "Participants matches");
 		Assert.assertEquals(actualCompany, companyValue);
+		logger.log(Status.PASS, "Company matches");
 		Assert.assertEquals(actualIdentifier, identifierValue);
+		logger.log(Status.PASS, "Identifier matches");
 	}
 }
