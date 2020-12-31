@@ -2,39 +2,136 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="28285" started-at="2020-12-30T19:34:41 IST" finished-at="2020-12-30T19:35:10 IST">
+  <suite name="Default suite" duration-ms="32052" started-at="2020-12-31T13:37:09 IST" finished-at="2020-12-31T13:37:41 IST">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="28285" started-at="2020-12-30T19:34:41 IST" finished-at="2020-12-30T19:35:10 IST">
+    <test name="Default test" duration-ms="32052" started-at="2020-12-31T13:37:09 IST" finished-at="2020-12-31T13:37:41 IST">
       <class name="com.qa.freecrm.calendar.testcases.CalendarTestCases">
-        <test-method status="PASS" signature="LaunchBrowser()[pri:0, instance:com.qa.freecrm.calendar.testcases.CalendarTestCases@1a8c74e]" name="LaunchBrowser" is-config="true" duration-ms="19943" started-at="2020-12-30T19:34:21 IST" finished-at="2020-12-30T19:34:41 IST">
+        <test-method status="PASS" signature="LaunchBrowser()[pri:0, instance:com.qa.freecrm.calendar.testcases.CalendarTestCases@f2b07d]" name="LaunchBrowser" is-config="true" duration-ms="15289" started-at="2020-12-31T13:36:53 IST" finished-at="2020-12-31T13:37:09 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- LaunchBrowser -->
-        <test-method status="PASS" signature="extentReportSetUp()[pri:0, instance:com.qa.freecrm.calendar.testcases.CalendarTestCases@1a8c74e]" name="extentReportSetUp" is-config="true" duration-ms="116" started-at="2020-12-30T19:34:41 IST" finished-at="2020-12-30T19:34:41 IST">
+        <test-method status="PASS" signature="extentReportSetUp()[pri:0, instance:com.qa.freecrm.calendar.testcases.CalendarTestCases@f2b07d]" name="extentReportSetUp" is-config="true" duration-ms="125" started-at="2020-12-31T13:37:09 IST" finished-at="2020-12-31T13:37:09 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- extentReportSetUp -->
-        <test-method status="PASS" signature="CreateNewEventTest()[pri:0, instance:com.qa.freecrm.calendar.testcases.CalendarTestCases@1a8c74e]" name="CreateNewEventTest" duration-ms="27837" started-at="2020-12-30T19:34:41 IST" finished-at="2020-12-30T19:35:09 IST">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- CreateNewEventTest -->
-        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:com.qa.freecrm.calendar.testcases.CalendarTestCases@1a8c74e]" name="getResult" is-config="true" duration-ms="4" started-at="2020-12-30T19:35:09 IST" finished-at="2020-12-30T19:35:09 IST">
+        <test-method status="PASS" signature="CreateNewEventTest(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.qa.freecrm.calendar.testcases.CalendarTestCases@f2b07d]" name="CreateNewEventTest" duration-ms="30929" started-at="2020-12-31T13:37:10 IST" data-provider="createnewevent" finished-at="2020-12-31T13:37:40 IST">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=CreateNewEventTest status=SUCCESS method=CalendarTestCases.CreateNewEventTest()[pri:0, instance:com.qa.freecrm.calendar.testcases.CalendarTestCases@1a8c74e] output={null}]]]>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[My Meeting title]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[My Calender]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Optional]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[23/01/2021 16:15]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[30/03/2021 22:30]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[standup meeting]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[My meeting Description]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[My meeting Location]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[Yes]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[client deal]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[client task]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[client case]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[1 Hour]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[50]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[Rajat P]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[Rahul Gupta]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[Google inc.]]>
+              </value>
+            </param>
+            <param index="18">
+              <value>
+                <![CDATA[Google meeting Identifier]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateNewEventTest -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:com.qa.freecrm.calendar.testcases.CalendarTestCases@f2b07d]" name="getResult" is-config="true" duration-ms="3" started-at="2020-12-31T13:37:40 IST" finished-at="2020-12-31T13:37:40 IST">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=CreateNewEventTest status=SUCCESS method=CalendarTestCases.CreateNewEventTest(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.qa.freecrm.calendar.testcases.CalendarTestCases@f2b07d] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- getResult -->
-        <test-method status="PASS" signature="endReport()[pri:0, instance:com.qa.freecrm.calendar.testcases.CalendarTestCases@1a8c74e]" name="endReport" is-config="true" duration-ms="294" started-at="2020-12-30T19:35:09 IST" finished-at="2020-12-30T19:35:10 IST">
+        <test-method status="PASS" signature="endReport()[pri:0, instance:com.qa.freecrm.calendar.testcases.CalendarTestCases@f2b07d]" name="endReport" is-config="true" duration-ms="328" started-at="2020-12-31T13:37:40 IST" finished-at="2020-12-31T13:37:41 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- endReport -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.qa.freecrm.calendar.testcases.CalendarTestCases@1a8c74e]" name="tearDown" is-config="true" duration-ms="86" started-at="2020-12-30T19:35:10 IST" finished-at="2020-12-30T19:35:10 IST">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.qa.freecrm.calendar.testcases.CalendarTestCases@f2b07d]" name="tearDown" is-config="true" duration-ms="32" started-at="2020-12-31T13:37:41 IST" finished-at="2020-12-31T13:37:41 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->

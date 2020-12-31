@@ -1,78 +1,46 @@
 package com.qa.freecrm.common.utilities;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
-import org.apache.poi.ss.usermodel.CellType;
+import java.io.IOException;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.testng.annotations.DataProvider;
 
 public class ExcelReader {
+	public static XSSFWorkbook workbook;
+	public static XSSFSheet worksheet;
+	public static DataFormatter formatter = new DataFormatter();
 
-	public FileInputStream fis = null;
-	public  XSSFWorkbook workbook = null;
-	public  XSSFSheet sheet = null;
-	public  XSSFRow row = null;
-	public  XSSFCell cell = null;
+	public static Object[][] getTableArray(String file_location, String sheetName) throws IOException {
+		FileInputStream fileInputStream = new FileInputStream(file_location); // Excel sheet file location get mentioned here
+		workbook = new XSSFWorkbook(fileInputStream); // get my workbook
+		worksheet = workbook.getSheet(sheetName);// get my sheet from workbook
+		XSSFRow Row = worksheet.getRow(0); // get my Row which start from 0
 
-	public ExcelReader(String xlFilePath) throws Exception {
-		fis = new FileInputStream(new File(xlFilePath));
-		workbook = new XSSFWorkbook(fis);
-		fis.close();
-	}
-	
-	
-	@DataProvider(name="getCalendarData")
-	public  String getCellData(String sheetName, String colName) {
-		int col_Num = 0;
-		try {
-			sheet = workbook.getSheet(sheetName);
-			row = sheet.getRow(0);
-			for (int i = 0; i < row.getLastCellNum(); i++) {
-				if (row.getCell(i).getStringCellValue().trim().equals(colName.trim()))
-					col_Num = i;
-			}
+		int RowNum = worksheet.getPhysicalNumberOfRows();// count my number of Rows
+		int ColNum = Row.getLastCellNum(); // get last ColNum
 
-			row = sheet.getRow(1);
-			cell = row.getCell(col_Num);
+		Object Data[][] = new Object[RowNum - 1][ColNum]; // pass my count data in array
 
-			if (cell.getCellTypeEnum() == CellType.STRING)
-				return cell.getStringCellValue();
-			else if (cell.getCellTypeEnum() == CellType.NUMERIC || cell.getCellTypeEnum() == CellType.FORMULA) {
-				String cellValue = String.valueOf(cell.getNumericCellValue());
-				if (HSSFDateUtil.isCellDateFormatted(cell)) {
-					DateFormat df = new SimpleDateFormat("dd/MM/yy");
-					Date date = cell.getDateCellValue();
-					cellValue = df.format(date);
+		for (int i = 0; i < RowNum - 1; i++){ // Loop work for Rows
+			XSSFRow row = worksheet.getRow(i + 1);
+			for (int j = 0; j < ColNum; j++) { // Loop work for colNum
+				if (row == null)
+					Data[i][j] = "";
+				else {
+					XSSFCell cell = row.getCell(j);
+					if (cell == null)
+						Data[i][j] = ""; // if it get Null value it pass no data
+					else {
+						String value = formatter.formatCellValue(cell);
+						Data[i][j] = value; // This formatter get my all values as string i.e integer, float all type
+						// data value
+					}
 				}
-				return cellValue;
-			} else if (cell.getCellTypeEnum() == CellType.BLANK)
-				return "";
-			else
-				return String.valueOf(cell.getBooleanCellValue());
-		} catch (Exception e) {
-			e.printStackTrace();
-			return " column " + col_Num + " does not exist  in Excel";
-		}
-	}
-
-	public static void main(String[] args) throws Exception {
-//		ExcelReader excelReader = new ExcelReader(System.getProperty("user.dir") + "//TestData//CalendarTestData.xlsx");
-//		System.out.println(excelReader.getCellData("Calendar", "Location"));
 			}
-	
-	
-	
-//	@Test(dataProvider  ="getCalendarData")
-//	public void test1() throws Exception {
-//		ExcelReader excelReader = new ExcelReader(System.getProperty("user.dir") + "//TestData//CalendarTestData.xlsx");
-//		String data = excelReader.getCellData("Calendar", "Location");
-//		System.out.println(data);
-//	}
+		}
+		return Data;
+	}
 }

@@ -1,6 +1,5 @@
 package com.qa.freecrm.calendar.pages;
 
-import java.util.ArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,7 +7,6 @@ import org.testng.Assert;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.qa.freecrm.base.PageBase;
-import com.qa.freecrm.base.TestBase;
 
 public class CalendarPages extends PageBase {
 	public CalendarPages(ExtentTest extentTest, WebDriver oDriver) {
@@ -53,6 +51,7 @@ public class CalendarPages extends PageBase {
 
 	public void clickNewButton() throws InterruptedException {
 		driver.findElement(newButton).click();
+		logger.log(Status.INFO, "Clicked on New button");
 	}
 
 	public void verifyCreateNewEventPage() throws InterruptedException {
@@ -61,64 +60,53 @@ public class CalendarPages extends PageBase {
 		logger.log(Status.PASS, "User is navigated to Create new Event page");
 	}
 
-	public void enterCalendarDetails(ArrayList<String> data) throws Exception {
-		String titleValue = data.get(0);
-		String calendarValue = data.get(1);
-		String categoryValue = data.get(2);
-		String startDateValue = data.get(3);
-		String endDateValue = data.get(4);
-		String tagsValue = data.get(5);
-		String descriptionValue = data.get(6);
-		String locationValue = data.get(7);
-		String allDayValue = data.get(8);
-		String dealValue = data.get(9);
-		String taskValue = data.get(10);
-		String caseValue = data.get(11);
-		String alertBeforeValue = data.get(12);
-		String reminderTimeValue = data.get(13);
-		String assignedToValue = data.get(14);
-		String participantsValue = data.get(15);
-		String companyValue = data.get(16);
-		String identifierValue = data.get(17);
+	public void enterCalendarDetails(String Title, String Calendar, String Category, String StartDate, String EndDate,
+			String Tags, String Description, String Location, String AllDay, String Deal, String Task, String Case,
+			String AlertBefore, String ReminderTime, String AssignedTo, String Participants, String Company,
+			String Identifier) throws InterruptedException {
 
-		enterTitle(titleValue);
-		enterCalendar(calendarValue);
-		enterCategory(categoryValue);
-		enterStartDate(startDateValue);
-		enterEndDate(endDateValue);
-		enterTags(tagsValue);
-		enterDescription(descriptionValue);
-		enterLocation(locationValue);
-		enterAllDay(allDayValue);
-		enterDeal(dealValue);
-		enterTask(taskValue);
-		enterCase(caseValue);
-		enterAlertBefore(alertBeforeValue);
-		enterReminderTime(reminderTimeValue);
-		enterAssignedTo(assignedToValue);
-		enterParticipants(participantsValue);
-		enterCompany(companyValue);
-		enterIdentifier(identifierValue);
+		enterTitle(Title);
+		enterCalendar(Calendar);
+		enterCategory(Category);
+		enterStartDate(StartDate);
+		enterEndDate(EndDate);
+		enterTags(Tags);
+		enterDescription(Description);
+		enterLocation(Location);
+		enterAllDay(AllDay);
+		enterDeal(Deal);
+		enterTask(Task);
+		enterCase(Case);
+		enterAlertBefore(AlertBefore);
+		enterReminderTime(ReminderTime);
+		enterAssignedTo(AssignedTo);
+		enterParticipants(Participants);
+		enterCompany(Company);
+		enterIdentifier(Identifier);
 	}
 
 	public void clickSaveButton() throws InterruptedException {
 		driver.findElement(saveButton).click();
+		logger.log(Status.INFO, "Clicked on Save button");
 	}
 
 	public void enterTitle(String sValue) throws InterruptedException {
 		driver.findElement(titleElement).sendKeys(sValue);
+		logger.log(Status.INFO, "Entered Title is " + sValue);
 	}
 
 	public void enterCalendar(String sValue) throws InterruptedException {
 		driver.findElement(calendarElement).click();
-		String xpath = "//div[@name='calendar']//div[contains(@class,'menu')]//div/span[contains(text(),'" + sValue+ "')]";
+		String xpath = "//div[@name='calendar']//div[contains(@class,'menu')]//div/span[contains(text(),'" + sValue + "')]";
 		driver.findElement(By.xpath(xpath)).click();
+		logger.log(Status.INFO, "Selected Calendar is " + sValue);
 	}
 
 	public void enterCategory(String sValue) throws InterruptedException {
 		driver.findElement(categoryElement).click();
-		String xpath = "//div[@name='category']//div[contains(@class,'menu')]//div//span[contains(text(),'" + sValue+ "')]";
+		String xpath = "//div[@name='category']//div[contains(@class,'menu')]//div//span[contains(text(),'" + sValue + "')]";
 		driver.findElement(By.xpath(xpath)).click();
+		logger.log(Status.INFO, "Entered Category is " + sValue);
 	}
 
 	public void enterStartDate(String sValue) throws InterruptedException {
@@ -140,15 +128,18 @@ public class CalendarPages extends PageBase {
 		WebElement suggestion = driver.findElement(By.xpath("//label[contains(text(),'Tags')]/..//div//div//span"));
 		suggestion.click();
 		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Tags')]/..//div//a[contains(text(),'" + sValue + "')]"));
+		logger.log(Status.INFO, "Entered Tag is " + sValue);
 		Assert.assertTrue(addedLabel.isDisplayed());
 	}
 
 	public void enterDescription(String sValue) throws InterruptedException {
 		driver.findElement(descriptionElement).sendKeys(sValue);
+		logger.log(Status.INFO, "Entered Description is " + sValue);
 	}
 
 	public void enterLocation(String sValue) throws InterruptedException {
 		driver.findElement(locationElement).sendKeys(sValue);
+		logger.log(Status.INFO, "Entered Location is " + sValue);
 	}
 
 	public void enterAllDay(String sValue) throws InterruptedException {
@@ -165,7 +156,8 @@ public class CalendarPages extends PageBase {
 		dealInput.sendKeys(sValue);
 		WebElement suggestion = driver.findElement(By.xpath("//label[contains(text(),'Deal')]/..//div//div//span"));
 		suggestion.click();
-		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Deal')]/..//input//following-sibling::div[contains(text(),'" + sValue+ "')]"));
+		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Deal')]/..//input//following-sibling::div[contains(text(),'" + sValue + "')]"));
+		logger.log(Status.INFO, "Entered Deal is " + sValue);
 		Assert.assertTrue(addedLabel.getText().equalsIgnoreCase(sValue));
 	}
 
@@ -175,7 +167,8 @@ public class CalendarPages extends PageBase {
 		taskInput.sendKeys(sValue);
 		WebElement suggestion = driver.findElement(By.xpath("//label[contains(text(),'Task')]/..//div//div//span"));
 		suggestion.click();
-		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Task')]/..//input//following-sibling::div[contains(text(),'" + sValue+ "')]"));
+		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Task')]/..//input//following-sibling::div[contains(text(),'" + sValue + "')]"));
+		logger.log(Status.INFO, "Entered Task is " + sValue);
 		Assert.assertTrue(addedLabel.getText().equalsIgnoreCase(sValue));
 	}
 
@@ -185,7 +178,8 @@ public class CalendarPages extends PageBase {
 		caseInput.sendKeys(sValue);
 		WebElement suggestion = driver.findElement(By.xpath("//label[contains(text(),'Case')]/..//div//div//span"));
 		suggestion.click();
-		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Case')]/..//input//following-sibling::div[contains(text(),'" + sValue+ "')]"));
+		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Case')]/..//input//following-sibling::div[contains(text(),'" + sValue + "')]"));
+		logger.log(Status.INFO, "Entered Case is " + sValue);
 		Assert.assertTrue(addedLabel.getText().equalsIgnoreCase(sValue));
 	}
 
@@ -193,16 +187,19 @@ public class CalendarPages extends PageBase {
 		driver.findElement(alertBeforeElement).click();
 		String xpath = "//div[@name='minutesBefore']//div//div//span[contains(text(),'" + sValue + "')]";
 		driver.findElement(By.xpath(xpath)).click();
+		logger.log(Status.INFO, "Alert before is " + sValue);
 	}
 
 	public void enterReminderTime(String sValue) throws InterruptedException {
 		driver.findElement(reminderTimeElement).sendKeys(sValue);
+		logger.log(Status.INFO, "Entered Reminder Time is " + sValue);
 	}
 
 	public void enterAssignedTo(String sValue) throws InterruptedException {
 		driver.findElement(assignedToElement).click();
 		String xpath = "//label[contains(text(),'Assigned To')]/..//div//i/following-sibling::div//div//span[contains(text(),'"	+ sValue + "')]";
 		driver.findElement(By.xpath(xpath)).click();
+		logger.log(Status.INFO, "Assigned to is " + sValue);
 	}
 
 	public void enterParticipants(String sValue) throws InterruptedException {
@@ -212,6 +209,7 @@ public class CalendarPages extends PageBase {
 		WebElement suggestion = driver.findElement(By.xpath("//label[contains(text(),'Participants')]/..//div//div//span"));
 		suggestion.click();
 		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Participants')]/..//div//a[contains(text(),'" + sValue + "')]"));
+		logger.log(Status.INFO, "Entered Participants is " + sValue);
 		Assert.assertTrue(addedLabel.isDisplayed());
 	}
 
@@ -221,32 +219,20 @@ public class CalendarPages extends PageBase {
 		companyInput.sendKeys(sValue);
 		WebElement suggestion = driver.findElement(By.xpath("//label[contains(text(),'Company')]/..//div//div//span"));
 		suggestion.click();
-		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Company')]/..//input//following-sibling::div[contains(text(),'"+ sValue + "')]"));
+		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Company')]/..//input//following-sibling::div[contains(text(),'" + sValue + "')]"));
+		logger.log(Status.INFO, "Entered Company is " + sValue);
 		Assert.assertTrue(addedLabel.getText().equalsIgnoreCase(sValue));
 	}
 
 	public void enterIdentifier(String sValue) throws InterruptedException {
 		driver.findElement(identifierElement).sendKeys(sValue);
+		logger.log(Status.INFO, "Entered Identifier is " + sValue);
 	}
 
-	public void verifyMeetingCreated(ArrayList<String> data) throws InterruptedException {
-		String titleValue = data.get(0);
-		String calendarValue = data.get(1);
-		String categoryValue = data.get(2);
-		String startDateValue = data.get(3);
-		String endDateValue = data.get(4);
-		String tagsValue = data.get(5);
-		String descriptionValue = data.get(6);
-		String locationValue = data.get(7);
-		String allDayValue = data.get(8);
-		String dealValue = data.get(9);
-		String taskValue = data.get(10);
-		String caseValue = data.get(11);
-		String reminderTimeValue = data.get(13);
-		String assignedToValue = data.get(14);
-		String participantsValue = data.get(15);
-		String companyValue = data.get(16);
-		String identifierValue = data.get(17);
+	public void verifyMeetingCreated(String Title, String Calendar, String Category, String StartDate, String EndDate,
+			String Tags, String Description, String Location, String AllDay, String Deal, String Task, String Case,
+			String AlertBefore, String ReminderTime, String AssignedTo, String Participants, String Company,
+			String Identifier) throws InterruptedException {
 
 		String actualTitle = driver.findElement(By.xpath("//div[contains(text(),'Title')]/following-sibling::div//div//span//p")).getText();
 		String actualCalendar = driver.findElement(By.xpath("//div[contains(text(),'Calendar')]/following-sibling::div")).getText();
@@ -266,37 +252,37 @@ public class CalendarPages extends PageBase {
 		String actualCompany = driver.findElement(By.xpath("//div[contains(text(),'Company')]/following-sibling::div//div[1]//div")).getText();
 		String actualIdentifier = driver.findElement(By.xpath("//div[contains(text(),'Identifier')]/following-sibling::div//div//span//p")).getText();
 
-		Assert.assertEquals(actualTitle, titleValue);
+		Assert.assertEquals(actualTitle, Title);
 		logger.log(Status.PASS, "Title matches");
-		Assert.assertEquals(actualCalendar, calendarValue);
+		Assert.assertEquals(actualCalendar, Calendar);
 		logger.log(Status.PASS, "Calendar value matches");
-		Assert.assertEquals(actualCategory, categoryValue);
+		Assert.assertEquals(actualCategory, Category);
 		logger.log(Status.PASS, "Category matches");
 //		Assert.assertEquals(actualStartDate, startDateValue);
 //		Assert.assertEquals(actualEndDate, endDateValue);
-		Assert.assertEquals(actualTags, tagsValue);
+		Assert.assertEquals(actualTags, Tags);
 		logger.log(Status.PASS, "Tag matches");
-		Assert.assertEquals(actualDescription, descriptionValue);
+		Assert.assertEquals(actualDescription, Description);
 		logger.log(Status.PASS, "Description matches");
-		Assert.assertEquals(actualLocation, locationValue);
+		Assert.assertEquals(actualLocation, Location);
 		logger.log(Status.PASS, "Location matches");
-		Assert.assertEquals(actualAllDay, allDayValue);
+		Assert.assertEquals(actualAllDay, AllDay);
 		logger.log(Status.PASS, "All Day matches");
-		Assert.assertEquals(actualDeal, dealValue);
+		Assert.assertEquals(actualDeal, Deal);
 		logger.log(Status.PASS, "Deal matches");
-		Assert.assertEquals(actualTask, taskValue);
+		Assert.assertEquals(actualTask, Task);
 		logger.log(Status.PASS, "Task matches");
-		Assert.assertEquals(actualCase, caseValue);
+		Assert.assertEquals(actualCase, Case);
 		logger.log(Status.PASS, "Case matches");
-		Assert.assertEquals(actualReminderTime, reminderTimeValue);
+		Assert.assertEquals(actualReminderTime, ReminderTime);
 		logger.log(Status.PASS, "Reminder Time mtches");
-		Assert.assertEquals(actualAssignedTo, assignedToValue);
+		Assert.assertEquals(actualAssignedTo, AssignedTo);
 		logger.log(Status.PASS, "Assigned To matches");
-		Assert.assertEquals(actualParticipants, participantsValue);
+		Assert.assertEquals(actualParticipants, Participants);
 		logger.log(Status.PASS, "Participants matches");
-		Assert.assertEquals(actualCompany, companyValue);
+		Assert.assertEquals(actualCompany, Company);
 		logger.log(Status.PASS, "Company matches");
-		Assert.assertEquals(actualIdentifier, identifierValue);
+		Assert.assertEquals(actualIdentifier, Identifier);
 		logger.log(Status.PASS, "Identifier matches");
 	}
 }

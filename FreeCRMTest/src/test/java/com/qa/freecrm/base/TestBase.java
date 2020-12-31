@@ -106,9 +106,8 @@ public class TestBase {
 			// MarkupHelper is used to display the output in different colors
 			test.log(Status.FAIL, MarkupHelper.createLabel(result.getName() + " - Test Case Failed", ExtentColor.RED));
 			test.log(Status.FAIL, MarkupHelper.createLabel(result.getThrowable() + " - Test Case Failed", ExtentColor.RED));
-			// To capture screenshot path and store the path of the screenshot in the string
-			// screenshotPath
-			// We do pass the path captured by this method in to the extent reports using "logger.addScreenCapture" method
+			// To capture screenshot path and store the path of the screenshot in the string screenshotPath
+			// We do pass the path captured by this method in to the extent reports using logger.addScreenCapture method
 			String screenshotPath = TakeScreenshot(driver, result.getName());
 			// To add it in the extent report
 			test.fail("Test Case Failed Snapshot is below " + test.addScreenCaptureFromPath(screenshotPath));

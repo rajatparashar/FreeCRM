@@ -1,50 +1,42 @@
 package com.qa.freecrm.calendar.testcases;
 
-import java.util.ArrayList;
-
-import org.openqa.selenium.WebDriver;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import com.aventstack.extentreports.ExtentTest;
 import com.qa.freecrm.base.TestBase;
 import com.qa.freecrm.calendar.pages.CalendarPages;
+import com.qa.freecrm.common.utilities.ExcelReader;
 
 public class CalendarTestCases extends TestBase {
 
 	public CalendarTestCases() {
 		super();
 	}
-	@Test(priority = 0)
-	public void CreateNewEventTest() throws Exception {
+
+	private static String sTestDataFile = System.getProperty("user.dir") + "\\TestData\\CalendarTestData.xlsx";
+
+	@DataProvider
+	public Object[][] createnewevent() throws Exception {
+		return ExcelReader.getTableArray(sTestDataFile, "Calendar");
+	}
+
+	@Test(dataProvider = "createnewevent", priority = 0)
+	public void CreateNewEventTest(String Iteration, String Title, String Calendar, String Category, String StartDate,
+			String EndDate, String Tags, String Description, String Location, String AllDay, String Deal, String Task,
+			String Case, String AlertBefore, String ReminderTime, String AssignedTo, String Participants,
+			String Company, String Identifier) throws Exception {
 		test = extent.createTest("Create new Event Test");
 		CalendarPages calendarPages = new CalendarPages(TestBase.test, this.getDriver());
 
-		ArrayList<String> data = new ArrayList<String>();
-		data.add("My Meeting title");
-		data.add("My Calender");
-		data.add("Optional");
-		data.add("23/01/2021 16:15");
-		data.add("30/03/2021 22:30");
-		data.add("standup meeting");
-		data.add("My meeting Description");
-		data.add("My meeting Location");
-		data.add("Yes");
-		data.add("client deal");
-		data.add("client task");
-		data.add("client case");
-		data.add("1 Hour");
-		data.add("50");
-		data.add("Rajat P");
-		data.add("Rahul Gupta");
-		data.add("Google inc.");
-		data.add("Google meeting Identifier");
+		System.out.println("Iteration is :" + Iteration);
 
 		calendarPages.clickCalendarButton();
 		calendarPages.verifyCalendarPage();
 		calendarPages.clickNewButton();
 		calendarPages.verifyCreateNewEventPage();
-		calendarPages.enterCalendarDetails(data);
+		calendarPages.enterCalendarDetails(Title, Calendar, Category, StartDate, EndDate, Tags, Description, Location,
+				AllDay, Deal, Task, Case, AlertBefore, ReminderTime, AssignedTo, Participants, Company, Identifier);
 		calendarPages.clickSaveButton();
-		calendarPages.verifyMeetingCreated(data);
+		calendarPages.verifyMeetingCreated(Title, Calendar, Category, StartDate, EndDate, Tags, Description, Location,
+				AllDay, Deal, Task, Case, AlertBefore, ReminderTime, AssignedTo, Participants, Company, Identifier);
 	}
 }
