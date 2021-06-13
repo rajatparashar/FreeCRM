@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Practice]">
+  <test thread-count="5" name="test(failed)">
+    <parameter name="browser" value="chrome"/>
+    <classes>
+      <class name="com.qa.AlertPopUpHandle">
+        <methods>
+          <include name="AlertTest"/>
+        </methods>
+      </class> <!-- com.qa.AlertPopUpHandle -->
+    </classes>
+  </test> <!-- test(failed) -->
+</suite> <!-- Failed suite [Practice] -->
