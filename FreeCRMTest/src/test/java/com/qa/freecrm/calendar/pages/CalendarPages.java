@@ -86,7 +86,8 @@ public class CalendarPages extends PageBase {
 	}
 
 	public void clickSaveButton() throws InterruptedException {
-		driver.findElement(saveButton).click();
+//		driver.findElement(saveButton).click();
+		click(driver, saveButton);
 		logger.log(Status.INFO, "Clicked on Save button");
 	}
 
@@ -96,37 +97,45 @@ public class CalendarPages extends PageBase {
 	}
 
 	public void enterCalendar(String sValue) throws InterruptedException {
-		driver.findElement(calendarElement).click();
+//		driver.findElement(calendarElement).click();
+		click(driver, calendarElement);
 		String xpath = "//div[@name='calendar']//div[contains(@class,'menu')]//div/span[contains(text(),'" + sValue + "')]";
-		driver.findElement(By.xpath(xpath)).click();
+//		driver.findElement(By.xpath(xpath)).click();
+		click(driver, By.xpath(xpath));
 		logger.log(Status.INFO, "Selected Calendar is " + sValue);
 	}
 
 	public void enterCategory(String sValue) throws InterruptedException {
-		driver.findElement(categoryElement).click();
+//		driver.findElement(categoryElement).click();
+		click(driver, categoryElement);
 		String xpath = "//div[@name='category']//div[contains(@class,'menu')]//div//span[contains(text(),'" + sValue + "')]";
-		driver.findElement(By.xpath(xpath)).click();
+//		driver.findElement(By.xpath(xpath)).click();
+		click(driver, By.xpath(xpath));
 		logger.log(Status.INFO, "Entered Category is " + sValue);
 	}
 
 	public void enterStartDate(String sValue) throws InterruptedException {
-		driver.findElement(startDateElement).click();
+//		driver.findElement(startDateElement).click();
+		click(driver, startDateElement);
 		driver.findElement(startDateElement).clear();
 		driver.findElement(startDateElement).sendKeys(sValue);
 	}
 
 	public void enterEndDate(String sValue) throws InterruptedException {
-		driver.findElement(endDateElement).click();
+//		driver.findElement(endDateElement).click();
+		click(driver, endDateElement);
 		driver.findElement(endDateElement).clear();
 		driver.findElement(endDateElement).sendKeys(sValue);
 	}
 
 	public void enterTags(String sValue) throws InterruptedException {
-		driver.findElement(tagsElement).click();
+//		driver.findElement(tagsElement).click();
+		click(driver, tagsElement);
 		WebElement tagInput = driver.findElement(By.xpath("//label[contains(text(),'Tags')]/..//input"));
 		tagInput.sendKeys(sValue);
 		WebElement suggestion = driver.findElement(By.xpath("//label[contains(text(),'Tags')]/..//div//div//span"));
-		suggestion.click();
+//		suggestion.click();
+		click(driver, By.xpath("//label[contains(text(),'Tags')]/..//div//div//span"));
 		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Tags')]/..//div//a[contains(text(),'" + sValue + "')]"));
 		logger.log(Status.INFO, "Entered Tag is " + sValue);
 		Assert.assertTrue(addedLabel.isDisplayed());
@@ -144,49 +153,58 @@ public class CalendarPages extends PageBase {
 
 	public void enterAllDay(String sValue) throws InterruptedException {
 		if (sValue.equalsIgnoreCase("yes")) {
-			driver.findElement(allDayElement).click();
+//			driver.findElement(allDayElement).click();
+			click(driver, allDayElement);
 		} else {
 			// no action required
 		}
 	}
 
 	public void enterDeal(String sValue) throws InterruptedException {
-		driver.findElement(dealElement).click();
+//		driver.findElement(dealElement).click();
+		click(driver, dealElement);
 		WebElement dealInput = driver.findElement(By.xpath("//label[contains(text(),'Deal')]/..//input"));
 		dealInput.sendKeys(sValue);
 		WebElement suggestion = driver.findElement(By.xpath("//label[contains(text(),'Deal')]/..//div//div//span"));
-		suggestion.click();
+//		suggestion.click();
+		click(driver, By.xpath("//label[contains(text(),'Deal')]/..//div//div//span"));
 		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Deal')]/..//input//following-sibling::div[contains(text(),'" + sValue + "')]"));
 		logger.log(Status.INFO, "Entered Deal is " + sValue);
 		Assert.assertTrue(addedLabel.getText().equalsIgnoreCase(sValue));
 	}
 
 	public void enterTask(String sValue) throws InterruptedException {
-		driver.findElement(taskElement).click();
+//		driver.findElement(taskElement).click();
+		click(driver, taskElement);
 		WebElement taskInput = driver.findElement(By.xpath("//label[contains(text(),'Task')]/..//input"));
 		taskInput.sendKeys(sValue);
 		WebElement suggestion = driver.findElement(By.xpath("//label[contains(text(),'Task')]/..//div//div//span"));
-		suggestion.click();
+//		suggestion.click();
+		click(driver, By.xpath("//label[contains(text(),'Task')]/..//div//div//span"));
 		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Task')]/..//input//following-sibling::div[contains(text(),'" + sValue + "')]"));
 		logger.log(Status.INFO, "Entered Task is " + sValue);
 		Assert.assertTrue(addedLabel.getText().equalsIgnoreCase(sValue));
 	}
 
 	public void enterCase(String sValue) throws InterruptedException {
-		driver.findElement(caseElement).click();
+//		driver.findElement(caseElement).click();
+		click(driver, caseElement);
 		WebElement caseInput = driver.findElement(By.xpath("//label[contains(text(),'Case')]/..//input"));
 		caseInput.sendKeys(sValue);
 		WebElement suggestion = driver.findElement(By.xpath("//label[contains(text(),'Case')]/..//div//div//span"));
-		suggestion.click();
+//		suggestion.click();
+		click(driver, By.xpath("//label[contains(text(),'Case')]/..//div//div//span"));
 		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Case')]/..//input//following-sibling::div[contains(text(),'" + sValue + "')]"));
 		logger.log(Status.INFO, "Entered Case is " + sValue);
 		Assert.assertTrue(addedLabel.getText().equalsIgnoreCase(sValue));
 	}
 
 	public void enterAlertBefore(String sValue) throws InterruptedException {
-		driver.findElement(alertBeforeElement).click();
+//		driver.findElement(alertBeforeElement).click();
+		click(driver, alertBeforeElement);
 		String xpath = "//div[@name='minutesBefore']//div//div//span[contains(text(),'" + sValue + "')]";
-		driver.findElement(By.xpath(xpath)).click();
+//		driver.findElement(By.xpath(xpath)).click();
+		click(driver, By.xpath(xpath));
 		logger.log(Status.INFO, "Alert before is " + sValue);
 	}
 
@@ -196,29 +214,35 @@ public class CalendarPages extends PageBase {
 	}
 
 	public void enterAssignedTo(String sValue) throws InterruptedException {
-		driver.findElement(assignedToElement).click();
+//		driver.findElement(assignedToElement).click();
+		click(driver, assignedToElement);
 		String xpath = "//label[contains(text(),'Assigned To')]/..//div//i/following-sibling::div//div//span[contains(text(),'"	+ sValue + "')]";
-		driver.findElement(By.xpath(xpath)).click();
+//		driver.findElement(By.xpath(xpath)).click();
+		click(driver, By.xpath(xpath));
 		logger.log(Status.INFO, "Assigned to is " + sValue);
 	}
 
 	public void enterParticipants(String sValue) throws InterruptedException {
-		driver.findElement(participantsElement).click();
+//		driver.findElement(participantsElement).click();
+		click(driver, participantsElement);
 		WebElement participantInput = driver.findElement(By.xpath("//label[contains(text(),'Participants')]/..//input"));
 		participantInput.sendKeys(sValue);
 		WebElement suggestion = driver.findElement(By.xpath("//label[contains(text(),'Participants')]/..//div//div//span"));
-		suggestion.click();
+//		suggestion.click();
+		click(driver, By.xpath("//label[contains(text(),'Participants')]/..//div//div//span"));
 		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Participants')]/..//div//a[contains(text(),'" + sValue + "')]"));
 		logger.log(Status.INFO, "Entered Participants is " + sValue);
 		Assert.assertTrue(addedLabel.isDisplayed());
 	}
 
 	public void enterCompany(String sValue) throws InterruptedException {
-		driver.findElement(companyElement).click();
+//		driver.findElement(companyElement).click();
+		click(driver, companyElement);
 		WebElement companyInput = driver.findElement(By.xpath("//label[contains(text(),'Company')]/..//input"));
 		companyInput.sendKeys(sValue);
 		WebElement suggestion = driver.findElement(By.xpath("//label[contains(text(),'Company')]/..//div//div//span"));
-		suggestion.click();
+//		suggestion.click();
+		click(driver, By.xpath("//label[contains(text(),'Company')]/..//div//div//span"));
 		WebElement addedLabel = driver.findElement(By.xpath("//label[contains(text(),'Company')]/..//input//following-sibling::div[contains(text(),'" + sValue + "')]"));
 		logger.log(Status.INFO, "Entered Company is " + sValue);
 		Assert.assertTrue(addedLabel.getText().equalsIgnoreCase(sValue));

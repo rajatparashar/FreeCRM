@@ -6,7 +6,7 @@
       <class name="com.qa.freecrm.calendar.testcases.CalendarTestCases">
         <methods>
           <include name="endReport"/>
-          <include name="CreateNewEventTest"/>
+          <include name="CreateNewEventTest" invocation-numbers="0"/>
           <include name="extentReportSetUp"/>
           <include name="LaunchBrowser"/>
           <include name="getResult"/>

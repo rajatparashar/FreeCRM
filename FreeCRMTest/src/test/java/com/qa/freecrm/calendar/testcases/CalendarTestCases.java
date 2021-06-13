@@ -27,8 +27,6 @@ public class CalendarTestCases extends TestBase {
 		test = extent.createTest("Create new Event Test");
 		CalendarPages calendarPages = new CalendarPages(TestBase.test, this.getDriver());
 
-		System.out.println("Iteration is :" + Iteration);
-
 		calendarPages.clickCalendarButton();
 		calendarPages.verifyCalendarPage();
 		calendarPages.clickNewButton();
